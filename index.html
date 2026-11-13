@@ -300,9 +300,12 @@ function vEdit(){
   $('#mn').innerHTML = `
     ${ed?'':`<div class="card" style="margin-top:6px">
       <div style="font-weight:700;font-size:14px">서류로 자동 채우기</div>
-      <div class="small" style="margin-top:2px">여권·노동허가서를 찍거나 PDF를 올리면 만료일을 찾아 줍니다. 사진과 파일은 휴대폰 안에서만 읽고 저장하지 않습니다.</div>
-      <div class="row2"><button class="btn" id="bCam" style="flex:1">📷 사진</button><button class="btn ghost" id="bPdf" style="flex:1">📄 PDF</button></div>
+      <div class="small" style="margin-top:2px">여권·노동허가서·체류증을 찍거나 파일을 고르면 만료일을 찾아 줍니다. 사진과 파일은 휴대폰 안에서만 읽고 저장하지 않습니다.</div>
+      <button class="btn" id="bCam">📷 카메라로 찍기</button>
+      <div class="small" style="margin-top:6px">여권은 사진 페이지 맨 아래 &lt;&lt;&lt; 두 줄이, 노동허가서·체류증은 만료 날짜 줄이 잘 보이게 반듯하게 찍어 주세요.</div>
+      <div class="row2"><button class="btn ghost" id="bPic" style="flex:1">🖼 사진 고르기</button><button class="btn ghost" id="bPdf" style="flex:1">📄 PDF 고르기</button></div>
       <input type="file" id="fCam" accept="image/*" capture="environment" style="display:none">
+      <input type="file" id="fPic" accept="image/*" style="display:none">
       <input type="file" id="fPdf" accept="application/pdf" style="display:none">
       <div id="scan" class="small" style="margin-top:8px"></div></div>`}
     <label class="f">누구의 서류인가요?</label>
@@ -317,6 +320,7 @@ function vEdit(){
   $('#ty').onchange=e=>{cur.type=e.target.value; $('#cw').style.display=cur.type==='other'?'block':'none';};
   if(!ed){
     $('#bCam').onclick=()=>$('#fCam').click();
+    $('#bPic').onclick=()=>$('#fPic').click();
     $('#bPdf').onclick=()=>$('#fPdf').click();
     const run=async(file,isPdf)=>{
       if(!file) return;
@@ -333,7 +337,8 @@ function vEdit(){
                                      : `? ${nm}에서 ${r.date}을(를) 만료일로 짐작했습니다. 서류와 꼭 대조해 주세요.`;
       }catch(err){ st.style.color='var(--red)'; st.textContent='읽기에 실패했습니다(인터넷 연결 확인). 직접 입력해 주세요.'; console.error(err); }
     };
-    $('#fCam').onchange=e=>run(e.target.files[0],false);
+    $('#fCam').onchange=e=>{ run(e.target.files[0],false); e.target.value=''; };
+    $('#fPic').onchange=e=>{ run(e.target.files[0],false); e.target.value=''; };
     $('#fPdf').onchange=e=>run(e.target.files[0],true);
   }
   $('#sv').onclick=()=>{
@@ -352,8 +357,17 @@ const LIB = {
 };
 const _loaded={};
 function loadScript(src){ return _loaded[src] ||= new Promise((ok,no)=>{ const s=document.createElement('script'); s.src=src; s.onload=ok; s.onerror=no; document.head.appendChild(s); }); }
+// 휴대폰 사진(수천 픽셀)을 긴 변 2000px 흑백으로 줄여 읽기를 빠르고 정확하게
+async function prepImage(file){
+  const bmp = await createImageBitmap(file);
+  const k = Math.min(1, 2000/Math.max(bmp.width,bmp.height));
+  const cv=document.createElement('canvas'); cv.width=Math.round(bmp.width*k); cv.height=Math.round(bmp.height*k);
+  const g=cv.getContext('2d'); g.filter='grayscale(1) contrast(1.4)'; g.drawImage(bmp,0,0,cv.width,cv.height);
+  return cv;
+}
 async function ocr(src, say){
   await loadScript(LIB.ocr);
+  if(src instanceof Blob){ try{ src = await prepImage(src); }catch(e){ /* 줄이기 실패하면 원본 그대로 */ } }
   const { data } = await Tesseract.recognize(src, 'eng', { logger: m=>{ if(say && m.status==='recognizing text') say(`글자 읽는 중… ${Math.round(m.progress*100)}%`); } });
   return data.text;
 }

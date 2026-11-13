@@ -1,5 +1,5 @@
 // 갱신알리미 오프라인 캐시. 앱 파일을 고치면 VERSION 숫자를 올린다.
-const VERSION = 'gaengsin-v1';
+const VERSION = 'gaengsin-v2';
 const SHELL = ['./', './index.html', './parsers.js', './manifest.webmanifest',
   './icons/icon-192.png', './icons/icon-512.png', './icons/apple-touch-icon.png'];
 
