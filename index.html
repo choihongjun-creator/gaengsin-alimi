@@ -16,19 +16,19 @@
 <style>
 :root{
   --bg:#f3f4f6; --card:#ffffff; --ink:#111827; --sub:#6b7280; --line:#e5e7eb;
-  --brand:#2563eb; --brand-ink:#ffffff; --red:#dc2626; --red-bg:#fee2e2;
+  --brand:#2563eb; --brand-ink:#ffffff; --brand-bg:#eff6ff; --red:#dc2626; --red-bg:#fee2e2;
   --yellow:#b45309; --yellow-bg:#fef3c7; --green:#15803d; --green-bg:#dcfce7;
   --gray:#6b7280; --gray-bg:#f3f4f6; --warn-bg:#fff7ed; --warn-line:#fdba74;
 }
 @media (prefers-color-scheme: dark){
   :root:not([data-theme="light"]){
-    --bg:#0b0f17; --card:#151b26; --ink:#e5e7eb; --sub:#9ca3af; --line:#273042;
+    --bg:#0b0f17; --card:#151b26; --ink:#e5e7eb; --sub:#9ca3af; --line:#273042; --brand-bg:#14213d;
     --brand:#3b82f6; --red:#f87171; --red-bg:#3a1414; --yellow:#fbbf24; --yellow-bg:#3a2a0a;
     --green:#4ade80; --green-bg:#0f2e1a; --gray:#9ca3af; --gray-bg:#1f2633; --warn-bg:#2a1a0a; --warn-line:#9a5b1a;
   }
 }
 :root[data-theme="dark"]{
-  --bg:#0b0f17; --card:#151b26; --ink:#e5e7eb; --sub:#9ca3af; --line:#273042;
+  --bg:#0b0f17; --card:#151b26; --ink:#e5e7eb; --sub:#9ca3af; --line:#273042; --brand-bg:#14213d;
   --brand:#3b82f6; --red:#f87171; --red-bg:#3a1414; --yellow:#fbbf24; --yellow-bg:#3a2a0a;
   --green:#4ade80; --green-bg:#0f2e1a; --gray:#9ca3af; --gray-bg:#1f2633; --warn-bg:#2a1a0a; --warn-line:#9a5b1a;
 }
@@ -44,7 +44,7 @@ header h1{font-size:20px;margin:0;flex:1}
 .iconbtn{border:0;background:var(--brand);color:var(--brand-ink);width:36px;height:36px;border-radius:50%;font-size:22px;line-height:36px;cursor:pointer}
 main{flex:1;overflow-y:auto;padding:0 16px 96px}
 nav.tabs{position:sticky;bottom:0;display:flex;background:var(--card);border-top:1px solid var(--line);padding-bottom:env(safe-area-inset-bottom)}
-nav.tabs button{flex:1;border:0;background:none;padding:10px 0 14px;color:var(--sub);font-size:12px;cursor:pointer}
+nav.tabs button{flex:1;border:0;background:none;padding:10px 0 12px;color:var(--sub);font-size:11px;cursor:pointer}
 nav.tabs button .i{display:block;font-size:20px;margin-bottom:2px}
 nav.tabs button.on{color:var(--brand);font-weight:700}
 .chips{display:flex;gap:6px;flex-wrap:wrap;margin:4px 0 12px}
@@ -61,14 +61,15 @@ nav.tabs button.on{color:var(--brand);font-weight:700}
 .lv-yellow .dot{background:var(--yellow)} .lv-yellow .dday{color:var(--yellow);background:var(--yellow-bg)} .lv-yellow .m{color:var(--yellow)}
 .lv-green .dot{background:var(--green)} .lv-green .dday{color:var(--green);background:var(--green-bg)}
 .lv-gray .dot{background:var(--gray)} .lv-gray .dday{color:var(--gray);background:var(--gray-bg)} .lv-gray .m{color:var(--gray)}
-.empty{text-align:center;color:var(--sub);padding:48px 0}
+.empty{text-align:center;color:var(--sub);padding:36px 0}
 .btn{display:block;width:100%;border:0;border-radius:12px;padding:14px;font-size:15px;font-weight:700;cursor:pointer;background:var(--brand);color:var(--brand-ink);margin-top:10px}
 .btn.ghost{background:var(--card);color:var(--ink);border:1px solid var(--line)}
 .btn.danger{background:var(--card);color:var(--red);border:1px solid var(--line)}
+.btn.sm{padding:9px 12px;font-size:13px;margin-top:8px;width:auto;display:inline-block}
 .row2{display:flex;gap:8px} .row2 .btn{flex:1}
 label.f{display:block;font-size:13px;color:var(--sub);margin:14px 0 6px}
 input,select{width:100%;font-size:16px;padding:12px;border:1px solid var(--line);border-radius:10px;background:var(--card);color:var(--ink)}
-.sec{font-size:13px;color:var(--sub);font-weight:700;margin:18px 0 8px}
+.sec{font-size:13px;color:var(--sub);font-weight:700;margin:18px 0 8px;display:flex;justify-content:space-between}
 .alerts .a{display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--line);font-size:14px}
 .alerts .a:last-child{border-bottom:0}
 .alerts .past{color:var(--sub);text-decoration:line-through}
@@ -82,15 +83,46 @@ input,select{width:100%;font-size:16px;padding:12px;border:1px solid var(--line)
 .stage h3{font-size:14px;margin:0;display:flex;justify-content:space-between;cursor:pointer}
 .stage h3 span{color:var(--sub);font-weight:400;font-size:12px}
 .item{display:flex;gap:10px;padding:10px 0;border-top:1px solid var(--line);font-size:14px;line-height:1.45}
+.item:first-child{border-top:0}
 .item input{width:20px;height:20px;flex:none;margin-top:1px}
 .item .n{font-size:12px;color:var(--sub);margin-top:2px}
 .item.done .x{text-decoration:line-through;color:var(--sub)}
 .small{font-size:12px;color:var(--sub);line-height:1.5}
-.mem{display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:1px solid var(--line)}
+.mem{display:flex;justify-content:space-between;align-items:center;gap:8px;padding:10px 0;border-bottom:1px solid var(--line)}
 .mem:last-child{border-bottom:0}
-.link{border:0;background:none;color:var(--red);cursor:pointer;font-size:13px}
-.toast{position:fixed;left:50%;bottom:90px;transform:translateX(-50%);background:#111827;color:#fff;padding:10px 16px;border-radius:999px;font-size:14px;opacity:0;transition:opacity .2s;pointer-events:none;z-index:9}
+.link{border:0;background:none;color:var(--red);cursor:pointer;font-size:13px;padding:4px}
+.toast{position:fixed;left:50%;bottom:100px;transform:translateX(-50%);background:#111827;color:#fff;padding:10px 16px;border-radius:999px;font-size:14px;opacity:0;transition:opacity .2s;pointer-events:none;z-index:20}
 .toast.show{opacity:.95}
+/* 할 일 */
+.task{border-left:4px solid var(--line)}
+.task.overdue{border-left-color:var(--red)} .task.now{border-left-color:var(--brand)} .task.soon{border-left-color:var(--yellow)}
+.task .tt{font-weight:700;font-size:15px}
+.task .when{font-size:13px;margin-top:3px;font-weight:600}
+.task.overdue .when{color:var(--red)} .task.now .when{color:var(--brand)} .task.soon .when{color:var(--yellow)}
+.task .act{font-size:13px;margin-top:6px;line-height:1.5}
+.task .ex{font-size:13px;margin-top:6px;background:var(--brand-bg);border-radius:8px;padding:6px 8px}
+.task .wn{font-size:12px;margin-top:6px;color:var(--yellow)}
+.hero{background:var(--brand);color:var(--brand-ink);border-radius:16px;padding:16px;margin-bottom:12px}
+.hero .big{font-size:22px;font-weight:800;margin-top:2px}
+.hero .s{opacity:.9;font-size:13px;margin-top:4px}
+/* 지갑 */
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.thumb{background:var(--card);border:1px solid var(--line);border-radius:12px;overflow:hidden;cursor:pointer}
+.thumb img{display:block;width:100%;height:110px;object-fit:cover;background:var(--gray-bg)}
+.thumb div{padding:6px 8px;font-size:12px}
+.overlay{position:fixed;inset:0;background:#000;z-index:30;display:flex;flex-direction:column}
+.overlay img{flex:1;min-height:0;width:100%;object-fit:contain}
+.overlay .bar{display:flex;justify-content:space-between;align-items:center;color:#fff;padding:calc(12px + env(safe-area-inset-top)) 16px 12px;font-size:15px}
+.overlay button{background:none;border:0;color:#fff;font-size:15px;padding:8px}
+/* 체류일 */
+.stat{display:flex;justify-content:space-between;align-items:baseline;padding:8px 0;border-bottom:1px solid var(--line);font-size:14px}
+.stat:last-child{border-bottom:0}
+.stat b{font-size:16px}
+.stayrow{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.stayrow input,.stayrow select{padding:10px;font-size:15px}
+.tel{color:var(--brand);text-decoration:none;font-weight:700}
+.chk{display:flex;gap:8px;align-items:center;font-size:13px;margin-top:10px}
+.chk input{width:18px;height:18px}
 </style>
 </head>
 <body>
@@ -98,25 +130,29 @@ input,select{width:100%;font-size:16px;padding:12px;border:1px solid var(--line)
   <header id="hd"></header>
   <main id="mn"></main>
   <nav class="tabs" id="tabs">
-    <button data-tab="docs"><span class="i">🗂</span>서류함</button>
-    <button data-tab="check"><span class="i">✅</span>체크리스트</button>
-    <button data-tab="settings"><span class="i">⚙️</span>설정</button>
+    <button data-tab="home"><span class="i">🏠</span>홈</button>
+    <button data-tab="docs"><span class="i">🗂</span>서류</button>
+    <button data-tab="wallet"><span class="i">👛</span>지갑</button>
+    <button data-tab="stay"><span class="i">✈️</span>체류일</button>
+    <button data-tab="more"><span class="i">☰</span>더보기</button>
   </nav>
 </div>
 <div class="toast" id="toast"></div>
+<input type="file" id="fAny" style="display:none">
 
 <script src="parsers.js"></script>
+<script src="logic.js"></script>
 <script>
-/* ================= 데이터: 나라별 기준 (법이 바뀌면 여기만 고친다) ================= */
+/* ================= 데이터: 나라별 기준 (법이 바뀌면 여기와 logic.js 만 고친다) ================= */
 const COUNTRIES = {
   VN: {
     name: '베트남',
     docs: {
       passport:  {name:'여권', alerts:[180,90,30],
-        tip:'임시거주증(TRC) 기간이 여권 기간에 묶입니다. TRC는 여권 만료 30일 이상 전에 끝나야 합니다. 해외 재발급 처리 기간은 대사관·총영사관 \'여권발급현황\'에서 확인하세요.'},
+        tip:'체류증(TRC) 기간이 여권 기간에 묶입니다. 체류증은 여권 만료 30일 이상 전에 끝나게 발급됩니다. 해외 재발급 처리 기간은 대사관·총영사관 \'여권발급현황\'에서 확인하세요.'},
       visa:      {name:'비자', alerts:[60,30,14], tip:'체류 목적에 맞는 비자 종류와 연장 가능 여부를 회사 담당자와 확인하세요.'},
       trc:       {name:'임시거주증(TRC)', alerts:[60,30,14],
-        tip:'만료일이 지나면 연장이 안 되고 처음처럼 새로 신청해야 합니다. 연장 처리는 서류 접수 후 약 5 영업일로 안내됩니다. 노동허가서 연장이 먼저 끝나야 진행할 수 있습니다. 노동(LĐ) 체류증은 최대 2년이며, 여권 만료보다 30일 이상 먼저 끝나게 발급됩니다.'},
+        tip:'만료일이 지나면 연장이 안 되고 처음처럼 새로 신청해야 합니다. 연장 처리는 서류 접수 후 약 5 영업일로 안내됩니다. 노동허가서 연장이 먼저 끝나야 진행할 수 있습니다. 노동(LĐ) 체류증은 최대 2년, 가족(TT) 체류증은 최대 3년입니다.'},
       wp:        {name:'노동허가서(WP)', alerts:[60,45,15],
         tip:'연장 신청은 만료 45일 전부터 10일 전 사이에 합니다(2025년 개정 시행령 안내 자료). 연장은 1회, 최대 2년입니다.'},
       vnlicense: {name:'운전면허(베트남)', alerts:[60,30],
@@ -140,15 +176,27 @@ const COUNTRIES = {
 };
 const SRC_NOTE = '참고용 안내입니다. 최신 기준은 해당 기관에 확인하세요.';
 
+/* 비상 연락처 (검색 결과가 외교부 공식 페이지 내용으로 인용한 번호만) */
+const CONTACTS = {
+  VN: [
+    {name:'영사콜센터 (24시간, 한국어)', tels:[['+82-2-3210-0404','+82232100404']], note:'해외 사건사고·긴급 상황'},
+    {name:'주호치민 총영사관 사건사고', tels:[['+84-93-850-0238','+84938500238']], note:'베트남 남부 관할'},
+    {name:'주베트남 대사관 (하노이)', url:'https://www.0404.go.kr', note:'긴급번호는 외교부 해외안전여행에서 확인'},
+    {name:'경찰 · 소방 · 구급', tels:[['113','113'],['114','114'],['115','115']], note:'베트남어로 응대'}
+  ],
+  ETC: [
+    {name:'영사콜센터 (24시간, 한국어)', tels:[['+82-2-3210-0404','+82232100404']], note:'해외 사건사고·긴급 상황'},
+    {name:'외교부 해외안전여행', url:'https://www.0404.go.kr', note:'나라별 공관 연락처'}
+  ]
+};
+
 /* 체크리스트: stage.off = 기준일에서 며칠(음수=전) */
 const CHECKLISTS = {
   arrive: {
     name:'부임', icon:'✈', baseLabel:'도착(부임) 예정일',
     stages:[
-      {id:'pre', name:'출국 전', off:-14},
-      {id:'d0',  name:'도착 당일', off:0},
-      {id:'m1',  name:'도착 1개월', off:30},
-      {id:'m3',  name:'도착 3개월 후', off:90},
+      {id:'pre', name:'출국 전', off:-14}, {id:'d0', name:'도착 당일', off:0},
+      {id:'m1', name:'도착 1개월', off:30}, {id:'m3', name:'도착 3개월 후', off:90},
       {id:'any', name:'이사할 때마다', off:null}
     ],
     items:[
@@ -159,6 +207,7 @@ const CHECKLISTS = {
       {id:'a5', st:'pre', t:'해외 이삿짐 견적', aff:true},
       {id:'a6', st:'d0',  t:'거주 신고 확인', n:'베트남: 숙소 운영자(호텔·집주인)가 12시간 안에 공안에 신고. 했는지 확인', c:'VN'},
       {id:'a7', st:'d0',  t:'휴대폰 개통·현지 은행 계좌'},
+      {id:'a12',st:'d0',  t:'앱 \'체류일\'에 베트남 입국일 기록'},
       {id:'a8', st:'m1',  t:'노동허가서·체류증 발급 → 받으면 바로 앱에 만료일 등록'},
       {id:'a9', st:'m1',  t:'자녀 학교 등록'},
       {id:'a10',st:'m3',  t:'현지 운전면허 변환', n:'베트남: 3개월 이상 거주, 한국 면허 번역 공증 필요', c:'VN'},
@@ -168,10 +217,8 @@ const CHECKLISTS = {
   return: {
     name:'귀임', icon:'🏠', baseLabel:'귀국 예정일',
     stages:[
-      {id:'m3', name:'3개월 전', off:-90},
-      {id:'m1', name:'1개월 전', off:-30},
-      {id:'w2', name:'2주 전', off:-14},
-      {id:'after', name:'귀국 후', off:0}
+      {id:'m3', name:'3개월 전', off:-90}, {id:'m1', name:'1개월 전', off:-30},
+      {id:'w2', name:'2주 전', off:-14}, {id:'after', name:'귀국 후', off:0}
     ],
     items:[
       {id:'r1', st:'m3', t:'집 계약 해지 통보'},
@@ -184,7 +231,7 @@ const CHECKLISTS = {
       {id:'r8', st:'w2', t:'차량 처분'},
       {id:'r9', st:'after', t:'노동허가서 회수 확인', n:'베트남: 회사가 무효일부터 15일 안에 반납', c:'VN'},
       {id:'r10',st:'after', t:'주민등록 상태 확인·전입신고', n:'건강보험 자격이 주민등록에 연결'},
-      {id:'r11',st:'after', t:'건강보험 급여정지 해제 또는 지역가입 신고', n:'해외 체류 중 면제 기간 추징 사례 있음 → 출입국일 정리'},
+      {id:'r11',st:'after', t:'건강보험 급여정지 해제 또는 지역가입 신고', n:'해외 체류 중 면제 기간 추징 사례 있음 → 체류일 탭 기록 활용'},
       {id:'r12',st:'after', t:'국민연금 납부재개 신고'}
     ]
   }
@@ -192,141 +239,208 @@ const CHECKLISTS = {
 
 /* ================= 저장 ================= */
 const KEY = 'gaengsin-alimi-v1';
+const T = ()=>GL.ymd(new Date());              // 오늘 'YYYY-MM-DD'
 function today0(){ const d=new Date(); d.setHours(0,0,0,0); return d; }
-function addDays(d,n){ const x=new Date(d); x.setDate(x.getDate()+n); return x; }
-function ymd(d){ return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0'); }
-function parse(s){ const [y,m,d]=s.split('-').map(Number); return new Date(y,m-1,d); }
-function dleft(s){ return Math.round((parse(s)-today0())/86400000); }
+function dleft(s){ return GL.diff(T(), s); }
 function uid(){ return Math.random().toString(36).slice(2,9); }
-
-function sample(){
-  const t=today0();
-  return {
-    country:'VN',
-    members:[{id:'me',name:'나'},{id:'sp',name:'배우자'},{id:'c1',name:'자녀1'}],
-    docs:[
-      {id:uid(),m:'me',type:'trc',exp:ymd(addDays(t,24)),memo:''},
-      {id:uid(),m:'me',type:'wp',exp:ymd(addDays(t,71)),memo:''},
-      {id:uid(),m:'sp',type:'passport',exp:ymd(addDays(t,812)),memo:''},
-      {id:uid(),m:'me',type:'passport',exp:ymd(addDays(t,40)),memo:'끝 4자리 1234'},
-      {id:uid(),m:'me',type:'vnlicense',exp:ymd(addDays(t,1240)),memo:''}
-    ],
-    checks:{}, base:{arrive:'', return:''}, sample:true
-  };
+function fresh(){ return {country:'VN', members:[{id:'me',name:'나'}], docs:[], checks:{}, base:{arrive:'',return:''},
+  done:{}, prep:{}, stays:[], contacts:[], sample:false}; }
+function load(){
+  let o=null; try{ const s=localStorage.getItem(KEY); if(s) o=JSON.parse(s); }catch(e){}
+  return Object.assign(fresh(), o||{});   // 예전 버전 데이터에 새 칸 채우기
 }
-function empty(){ return {country:'VN', members:[{id:'me',name:'나'}], docs:[], checks:{}, base:{arrive:'',return:''}, sample:false}; }
-function load(){ try{ const s=localStorage.getItem(KEY); if(s) return JSON.parse(s); }catch(e){} return empty(); }
-const IS_IOS = /iPad|iPhone|iPod/.test(navigator.userAgent) || (navigator.platform==='MacIntel' && navigator.maxTouchPoints>1);
-function save(){ try{ localStorage.setItem(KEY, JSON.stringify(S)); }catch(e){} }
+function save(){ try{ localStorage.setItem(KEY, JSON.stringify(S)); }catch(e){ toast('저장 공간이 부족합니다'); } }
 let S = load();
+const IS_IOS = /iPad|iPhone|iPod/.test(navigator.userAgent) || (navigator.platform==='MacIntel' && navigator.maxTouchPoints>1);
+
+/* ================= 사본 지갑 저장소 (IndexedDB, 이 휴대폰 안에만) ================= */
+const Wallet = {
+  db:null,
+  open(){ return this.db ||= new Promise((ok,no)=>{ const r=indexedDB.open('gaengsin-wallet',1);
+    r.onupgradeneeded=()=>r.result.createObjectStore('copies',{keyPath:'id'}); r.onsuccess=()=>ok(r.result); r.onerror=()=>no(r.error); }); },
+  async tx(mode, fn){ const db=await this.open(); return new Promise((ok,no)=>{ const t=db.transaction('copies',mode); const st=t.objectStore('copies');
+    const res=fn(st); t.oncomplete=()=>ok(res && res.result!==undefined ? res.result : res); t.onerror=()=>no(t.error); }); },
+  put(rec){ return this.tx('readwrite', st=>st.put(rec)); },
+  del(id){ return this.tx('readwrite', st=>st.delete(id)); },
+  all(){ return this.tx('readonly', st=>st.getAll()).then(r=>(r||[]).sort((a,b)=>b.created-a.created)); }
+};
+let _urls=[];
+function blobURL(b){ const u=URL.createObjectURL(b); _urls.push(u); return u; }
+function freeURLs(){ _urls.forEach(u=>URL.revokeObjectURL(u)); _urls=[]; }
 
 /* ================= 공통 ================= */
 const $ = s=>document.querySelector(s);
+const $$ = s=>[...document.querySelectorAll(s)];
 function esc(s){ return String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
-function toast(msg){ const t=$('#toast'); t.textContent=msg; t.classList.add('show'); clearTimeout(toast._t); toast._t=setTimeout(()=>t.classList.remove('show'),1800); }
+function toast(msg){ const t=$('#toast'); t.textContent=msg; t.classList.add('show'); clearTimeout(toast._t); toast._t=setTimeout(()=>t.classList.remove('show'),2000); }
 function C(){ return COUNTRIES[S.country]||COUNTRIES.VN; }
 function typeInfo(type){ return C().docs[type] || COUNTRIES.VN.docs[type] || COUNTRIES.ETC.docs[type] || {name:type,alerts:[60,30,7],tip:''}; }
 function docName(d){ return d.type==='other' ? (d.custom||'기타 서류') : typeInfo(d.type).name; }
 function memName(id){ return (S.members.find(m=>m.id===id)||{name:'?'}).name; }
 function level(n){ return n<0?'gray':n<=30?'red':n<=90?'yellow':'green'; }
 function ddayText(n){ return n<0 ? '만료됨' : n===0 ? 'D-Day' : 'D-'+n.toLocaleString(); }
+function pickFile(accept, capture){ return new Promise(ok=>{ const f=$('#fAny'); f.value=''; f.accept=accept;
+  if(capture) f.setAttribute('capture','environment'); else f.removeAttribute('capture');
+  f.onchange=()=>ok(f.files[0]||null); f.click(); }); }
 
-/* 연동 경고 */
-function warnings(d){
-  const w=[]; const same=S.docs.filter(x=>x.m===d.m && x.id!==d.id);
-  const get=t=>same.find(x=>x.type===t);
-  if(S.country==='VN'){
-    if(d.type==='trc' || d.type==='passport'){
-      const trc = d.type==='trc'?d:get('trc'); const pp = d.type==='passport'?d:get('passport');
-      if(trc && pp && parse(trc.exp) > addDays(parse(pp.exp),-30))
-        w.push('여권이 임시거주증보다 먼저(또는 30일 안쪽으로) 끝납니다. 여권을 먼저 갱신해야 TRC가 제대로 나옵니다.');
-    }
-    if(d.type==='trc') w.push('임시거주증 연장은 노동허가서 연장이 먼저 끝나야 진행할 수 있습니다.');
-    if(d.type==='vnlicense'){
-      const trc=get('trc'), kr=get('krlicense');
-      if(trc && parse(d.exp)>parse(trc.exp)) w.push('베트남 운전면허 만료일이 임시거주증보다 늦습니다. 체류 서류가 끝나면 면허도 함께 확인하세요.');
-      if(kr && parse(d.exp)>parse(kr.exp)) w.push('베트남 운전면허 만료일이 한국 면허보다 늦습니다. 한국 면허 갱신도 챙기세요.');
-    }
-  }
-  return w;
+/* 사진을 긴 변 max px JPEG 로 줄이기 (지갑 보관·OCR 공용) */
+async function toCanvas(src, max, gray){
+  const bmp = src instanceof HTMLCanvasElement ? src : await createImageBitmap(src);
+  const k=Math.min(1, max/Math.max(bmp.width,bmp.height));
+  const cv=document.createElement('canvas'); cv.width=Math.round(bmp.width*k); cv.height=Math.round(bmp.height*k);
+  const g=cv.getContext('2d'); if(gray) g.filter='grayscale(1) contrast(1.4)'; g.drawImage(bmp,0,0,cv.width,cv.height); return cv;
+}
+function canvasToJpeg(cv){ return new Promise(ok=>cv.toBlob(b=>ok(b),'image/jpeg',0.85)); }
+async function saveCopy(src, m, docId, label){
+  const blob = await canvasToJpeg(await toCanvas(src, 1600, false));
+  await Wallet.put({id:uid(), m, docId:docId||null, label, blob, created:Date.now()});
 }
 
 /* ================= 화면 이동 ================= */
-let R = {tab:'docs', view:'docs', id:null, filter:'all', justSaved:false, open:{}};
-function go(view, opts={}){ Object.assign(R,{view, id:null, justSaved:false}, opts); render(); $('#mn').scrollTop=0; }
-document.querySelectorAll('#tabs button').forEach(b=>b.onclick=()=>{ R.tab=b.dataset.tab; go(b.dataset.tab); });
-
+let R = {tab:'home', view:'home', id:null, filter:'all', justSaved:false, open:{}, showLater:false};
+function go(view, opts={}){ Object.assign(R,{view, id:null, justSaved:false}, opts); render(); window.scrollTo(0,0); $('#mn').scrollTop=0; }
+$$('#tabs button').forEach(b=>b.onclick=()=>{ R.tab=b.dataset.tab; go(b.dataset.tab); });
 function render(){
-  document.querySelectorAll('#tabs button').forEach(b=>b.classList.toggle('on', b.dataset.tab===R.tab));
-  ({docs:vDocs, edit:vEdit, detail:vDetail, check:vCheck, list:vList, settings:vSettings}[R.view]||vDocs)();
+  freeURLs();
+  $$('#tabs button').forEach(b=>b.classList.toggle('on', b.dataset.tab===R.tab));
+  ({home:vHome, docs:vDocs, edit:vEdit, detail:vDetail, wallet:vWallet, wadd:vWadd, stay:vStay, more:vMore, list:vList}[R.view]||vHome)();
 }
 function head(title, back, right=''){
-  $('#hd').innerHTML = (back?`<button class="back" id="bk">‹</button>`:'')+`<h1>${esc(title)}</h1>${right}`;
+  $('#hd').innerHTML = (back?`<button class="back" id="bk" aria-label="뒤로">‹</button>`:'')+`<h1>${esc(title)}</h1>${right}`;
   if(back) $('#bk').onclick=back;
 }
 
-/* ---- 서류 목록 ---- */
+/* ================= 홈: 지금 할 일 ================= */
+function taskCard(t){
+  const when = t.status==='overdue' ? `${t.to} 만료됨`
+    : t.status==='now' ? (t.to>=T() && t.from<=T() ? `지금 할 때 · ${t.to}까지` : `${t.to}까지`)
+    : `${t.from}부터 · ${GL.diff(T(),t.from)}일 뒤 시작`;
+  const period = t.from!==t.to ? `<div class="small">${t.from} ~ ${t.to}</div>` : '';
+  return `<div class="card task ${t.status}">
+    <div class="small">${esc(memName(t.m))}</div>
+    <div class="tt">${esc(t.title)}</div>
+    <div class="when">${when}</div>${period}
+    ${t.act?`<div class="act">${esc(t.act)}</div>`:''}
+    ${t.extra.map(x=>`<div class="ex">👪 ${esc(x)}</div>`).join('')}
+    ${t.warn.map(x=>`<div class="wn">⚠ ${esc(x)}</div>`).join('')}
+    <div><button class="btn ghost sm" data-doc="${t.docId}">서류·준비물 보기</button>
+    ${t.status!=='later'?`<button class="btn sm" data-done="${esc(t.id)}" style="margin-left:6px">✓ 했어요</button>`:''}</div></div>`;
+}
+function contactsHTML(){
+  const base = (CONTACTS[S.country]||CONTACTS.VN).map(c=>`<div class="mem"><div><div style="font-weight:600;font-size:14px">${esc(c.name)}</div><div class="small">${esc(c.note||'')}</div></div>
+    <div style="text-align:right">${c.tels?c.tels.map(([s,n])=>`<a class="tel" href="tel:${n}">${esc(s)}</a>`).join('<br>'):`<a class="tel" href="${c.url}" target="_blank" rel="noopener">열기</a>`}</div></div>`).join('');
+  const mine = S.contacts.map(c=>`<div class="mem"><div style="font-weight:600;font-size:14px">${esc(c.name)}</div><a class="tel" href="tel:${esc(c.tel.replace(/[^+\d]/g,''))}">${esc(c.tel)}</a></div>`).join('');
+  return mine+base;
+}
+function vHome(){
+  const now=new Date();
+  head('갱신알리미', null, `<span class="small">${now.getMonth()+1}월 ${now.getDate()}일</span>`);
+  const tasks = GL.buildTasks(S, T(), docName);
+  const urgent = tasks.filter(t=>t.status==='overdue'||t.status==='now');
+  const soon = tasks.filter(t=>t.status==='soon');
+  const later = tasks.filter(t=>t.status==='later');
+  const seen=new Set(); tasks.forEach(t=>{ if(seen.has(t.docId)) t.warn=[]; else seen.add(t.docId); }); // 경고는 서류마다 첫 카드에만
+  let h='';
+  if(!S.docs.length){
+    h+=`<div class="hero"><div class="s">처음 오셨네요</div><div class="big">서류부터 등록하세요</div>
+      <div class="s">여권·노동허가서·체류증을 찍거나 PDF로 올리면 만료일을 찾아 주고, 언제 무엇을 해야 하는지 여기에 알려 드립니다.</div></div>
+      <button class="btn" id="hAdd">📷 첫 서류 등록하기</button>`;
+  } else {
+    const next = urgent[0] || soon[0] || later[0];
+    h+=`<div class="hero"><div class="s">${urgent.length?'지금 할 일':'지금 급한 일은 없습니다'}</div>
+      <div class="big">${urgent.length?`${urgent.length}건`:'👍 여유 있어요'}</div>
+      ${next&&!urgent.length?`<div class="s">다음 일: ${esc(next.title)} (${next.from}부터)</div>`:''}</div>`;
+    if(urgent.length) h+=`<div class="sec">지금 할 일</div>`+urgent.map(taskCard).join('');
+    if(soon.length) h+=`<div class="sec">곧 할 일 <span>90일 안</span></div>`+soon.map(taskCard).join('');
+    if(later.length){
+      const show = R.showLater ? later : later.slice(0,2);
+      h+=`<div class="sec">그다음</div>`+show.map(taskCard).join('');
+      if(later.length>2) h+=`<button class="btn ghost" id="hMore">${R.showLater?'접기':`나머지 ${later.length-2}건 더 보기`}</button>`;
+    }
+  }
+  // 체류일 요약
+  const rp = GL.stayReport(S.stays, T());
+  h+=`<div class="sec">체류일</div><div class="card" id="hStay" style="cursor:pointer">`;
+  if(rp){
+    h+=`<div class="stat"><span>${rp.year}년 베트남 체류</span><b>${rp.yearDays}일 <span class="small">/ 183일</span></b></div>
+      <div class="stat"><span>건강보험 해외 3개월 기준</span><b>${rp.krNow?'한국 체류 중':(rp.hi3<=T()?'충족':rp.hi3+' 충족')}</b></div>`;
+  } else h+=`<div class="small">베트남 입국·출국 날짜를 넣으면 세금 183일, 한국 건강보험 해외 체류 기준을 자동으로 계산합니다. 눌러서 시작 →</div>`;
+  h+=`</div>`;
+  // 체크리스트
+  h+=`<div class="sec">체크리스트</div><div class="row2">`+Object.entries(CHECKLISTS).map(([k,c])=>{
+    const its=itemsFor(k), done=its.filter(i=>S.checks[k+':'+i.id]).length;
+    return `<div class="card" data-l="${k}" style="flex:1;cursor:pointer;margin:0"><div style="font-weight:700">${c.icon} ${c.name}</div>
+      <div class="small">${done}/${its.length} 완료</div><div class="prog"><i style="width:${Math.round(done/its.length*100)}%"></i></div></div>`;
+  }).join('')+`</div>`;
+  // 비상 연락처
+  h+=`<div class="sec">비상 연락처 <span>누르면 전화</span></div><div class="card">${contactsHTML()}</div>`;
+  $('#mn').innerHTML=h;
+  const ha=$('#hAdd'); if(ha) ha.onclick=()=>{ R.tab='docs'; go('edit'); };
+  const hm=$('#hMore'); if(hm) hm.onclick=()=>{ R.showLater=!R.showLater; vHome(); };
+  $('#hStay').onclick=()=>{ R.tab='stay'; go('stay'); };
+  $$('[data-doc]').forEach(b=>b.onclick=()=>{ R.tab='docs'; go('detail',{id:b.dataset.doc}); });
+  $$('[data-done]').forEach(b=>b.onclick=()=>{ S.done[b.dataset.done]=true; save(); toast('완료로 표시했습니다'); vHome(); });
+  $$('[data-l]').forEach(c=>c.onclick=()=>go('list',{id:c.dataset.l, back:'home'}));
+}
+
+/* ================= 서류 목록 ================= */
 function vDocs(){
   head('내 서류', null, `<button class="iconbtn" id="add" aria-label="서류 추가">+</button>`);
   $('#add').onclick=()=>go('edit');
   const chips = [{id:'all',name:'전체'},...S.members].map(m=>`<button class="chip ${R.filter===m.id?'on':''}" data-f="${m.id}">${esc(m.name)}</button>`).join('');
-  let list = S.docs.filter(d=>R.filter==='all'||d.m===R.filter).sort((a,b)=>parse(a.exp)-parse(b.exp));
+  const list = S.docs.filter(d=>R.filter==='all'||d.m===R.filter).sort((a,b)=>a.exp<b.exp?-1:1);
   let h = `<div class="chips">${chips}</div>`;
-  if(S.sample) h += `<div class="small" style="margin-bottom:10px">지금 보이는 서류는 예시입니다. 설정에서 지울 수 있습니다.</div>`;
-  if(!list.length) h += `<div class="empty">아직 등록한 서류가 없습니다<br><button class="btn" id="add2" style="max-width:220px;margin:16px auto 0">첫 서류 추가</button></div>`;
+  if(!list.length) h += `<div class="empty">아직 등록한 서류가 없습니다<br><button class="btn" id="add2" style="max-width:220px;margin:16px auto 0">서류 추가</button></div>`;
   h += list.map(d=>{
     const n=dleft(d.exp), lv=level(n);
     const msg = n<0?'만료되었습니다. 바로 확인하세요' : lv==='red'?'지금 갱신 준비를 시작하세요' : lv==='yellow'?'갱신 서류를 미리 챙기세요':'';
-    const w = warnings(d).length ? ' ⚠' : '';
-    return `<div class="card doc lv-${lv}" data-id="${d.id}">
-      <span class="dot"></span>
+    const w = GL.docWarnings(S,d).length ? ' ⚠' : '';
+    return `<div class="card doc lv-${lv}" data-id="${d.id}"><span class="dot"></span>
       <div style="flex:1;min-width:0"><div class="t">${esc(docName(d))}${w}</div>
-        <div class="s">${esc(memName(d.m))} · ${d.exp} 만료</div>
-        ${msg?`<div class="m">${msg}</div>`:''}</div>
+        <div class="s">${esc(memName(d.m))} · ${d.exp} 만료</div>${msg?`<div class="m">${msg}</div>`:''}</div>
       <span class="dday">${ddayText(n)}</span></div>`;
   }).join('');
   $('#mn').innerHTML=h;
-  document.querySelectorAll('[data-f]').forEach(b=>b.onclick=()=>{R.filter=b.dataset.f; vDocs();});
-  document.querySelectorAll('.doc').forEach(c=>c.onclick=()=>go('detail',{id:c.dataset.id}));
+  $$('[data-f]').forEach(b=>b.onclick=()=>{R.filter=b.dataset.f; vDocs();});
+  $$('.doc').forEach(c=>c.onclick=()=>go('detail',{id:c.dataset.id}));
   const a2=$('#add2'); if(a2) a2.onclick=()=>go('edit');
 }
 
-/* ---- 서류 추가·수정 ---- */
+/* ================= 서류 추가·수정 ================= */
 function vEdit(){
   const ed = R.id ? S.docs.find(d=>d.id===R.id) : null;
   const cur = ed ? {...ed} : {m:S.members[0]?.id||'me', type:'passport', exp:'', memo:'', custom:''};
-  head(ed?'서류 수정':'서류 추가', ()=> ed?go('detail',{id:ed.id}):go('docs'));
+  let pending=null; // 찍은 사진/PDF 첫 장 → 지갑 보관용
+  head(ed?'서류 수정':'서류 추가', ()=> ed?go('detail',{id:ed.id}):go(R.tab==='home'?'home':'docs'));
   const types = Object.entries(C().docs).map(([k,v])=>`<option value="${k}" ${cur.type===k?'selected':''}>${esc(v.name)}</option>`).join('');
   $('#mn').innerHTML = `
     ${ed?'':`<div class="card" style="margin-top:6px">
       <div style="font-weight:700;font-size:14px">서류로 자동 채우기</div>
-      <div class="small" style="margin-top:2px">여권·노동허가서·체류증을 찍거나 파일을 고르면 만료일을 찾아 줍니다. 사진과 파일은 휴대폰 안에서만 읽고 저장하지 않습니다.</div>
+      <div class="small" style="margin-top:2px">찍거나 고르면 서류 종류와 만료일을 찾아 줍니다. 휴대폰 안에서만 읽습니다.</div>
       <button class="btn" id="bCam">📷 카메라로 찍기</button>
       <div class="small" style="margin-top:6px">여권은 사진 페이지 맨 아래 &lt;&lt;&lt; 두 줄이, 노동허가서·체류증은 만료 날짜 줄이 잘 보이게 반듯하게 찍어 주세요.</div>
-      <div class="row2"><button class="btn ghost" id="bPic" style="flex:1">🖼 사진 고르기</button><button class="btn ghost" id="bPdf" style="flex:1">📄 PDF 고르기</button></div>
-      <input type="file" id="fCam" accept="image/*" capture="environment" style="display:none">
-      <input type="file" id="fPic" accept="image/*" style="display:none">
-      <input type="file" id="fPdf" accept="application/pdf" style="display:none">
-      <div id="scan" class="small" style="margin-top:8px"></div></div>`}
+      <div class="row2"><button class="btn ghost" id="bPic">🖼 사진 고르기</button><button class="btn ghost" id="bPdf">📄 PDF 고르기</button></div>
+      <div id="scan" class="small" style="margin-top:8px"></div>
+      <label class="chk" id="keepWrap" style="display:none"><input type="checkbox" id="keep" checked> 이 사진을 사본 지갑에도 보관 (이 휴대폰에만)</label></div>`}
     <label class="f">누구의 서류인가요?</label>
-    <div class="chips" id="mm">${S.members.map(m=>`<button class="chip ${cur.m===m.id?'on':''}" data-m="${m.id}">${esc(m.name)}</button>`).join('')}</div>
+    <div class="chips">${S.members.map(m=>`<button class="chip ${cur.m===m.id?'on':''}" data-m="${m.id}">${esc(m.name)}</button>`).join('')}</div>
     <label class="f">서류 종류</label><select id="ty">${types}</select>
     <div id="cw" style="display:${cur.type==='other'?'block':'none'}"><label class="f">서류 이름</label><input id="cu" value="${esc(cur.custom||'')}" placeholder="예: 자녀 학생비자"></div>
     <label class="f">만료일</label><input id="ex" type="date" value="${cur.exp}">
-    <label class="f">메모 (선택)</label><input id="me" value="${esc(cur.memo)}" placeholder="서류번호 끝 4자리 등">
+    <label class="f">메모 (안 써도 됨)</label><input id="me" value="${esc(cur.memo)}" placeholder="예: 새 여권, 인사팀 김OO 담당">
     <div class="small" style="margin-top:8px">서류번호 전체는 적지 마세요. 모든 정보는 이 휴대폰 안에만 저장됩니다.</div>
     <button class="btn" id="sv">저장</button>`;
-  document.querySelectorAll('[data-m]').forEach(b=>b.onclick=()=>{cur.m=b.dataset.m; document.querySelectorAll('[data-m]').forEach(x=>x.classList.toggle('on',x===b));});
+  $$('[data-m]').forEach(b=>b.onclick=()=>{cur.m=b.dataset.m; $$('[data-m]').forEach(x=>x.classList.toggle('on',x===b));});
   $('#ty').onchange=e=>{cur.type=e.target.value; $('#cw').style.display=cur.type==='other'?'block':'none';};
   if(!ed){
-    $('#bCam').onclick=()=>$('#fCam').click();
-    $('#bPic').onclick=()=>$('#fPic').click();
-    $('#bPdf').onclick=()=>$('#fPdf').click();
     const run=async(file,isPdf)=>{
       if(!file) return;
       const st=$('#scan'); st.style.color=''; st.textContent='읽는 중… (처음 한 번은 읽기 프로그램을 내려받아 조금 걸립니다)';
       try{
-        const text = isPdf ? await readPdf(file, m=>st.textContent=m) : await ocr(file, m=>st.textContent=m);
+        let text;
+        if(isPdf){ const r=await readPdf(file, m=>st.textContent=m); text=r.text; pending=r.page; }
+        else { text=await ocr(file, m=>st.textContent=m); pending=file; }
+        if(pending) $('#keepWrap').style.display='flex';
         const r = GA.findExpiry(text);
         if(!r.date){ st.style.color='var(--red)'; st.textContent='만료일을 찾지 못했습니다. 더 밝고 반듯하게 다시 찍거나 직접 입력해 주세요.'; return; }
         if(r.type && C().docs[r.type]){ cur.type=r.type; $('#ty').value=r.type; $('#cw').style.display='none'; }
@@ -337,19 +451,21 @@ function vEdit(){
                                      : `? ${nm}에서 ${r.date}을(를) 만료일로 짐작했습니다. 서류와 꼭 대조해 주세요.`;
       }catch(err){ st.style.color='var(--red)'; st.textContent='읽기에 실패했습니다(인터넷 연결 확인). 직접 입력해 주세요.'; console.error(err); }
     };
-    $('#fCam').onchange=e=>{ run(e.target.files[0],false); e.target.value=''; };
-    $('#fPic').onchange=e=>{ run(e.target.files[0],false); e.target.value=''; };
-    $('#fPdf').onchange=e=>run(e.target.files[0],true);
+    $('#bCam').onclick=async()=>run(await pickFile('image/*',true),false);
+    $('#bPic').onclick=async()=>run(await pickFile('image/*',false),false);
+    $('#bPdf').onclick=async()=>run(await pickFile('application/pdf',false),true);
   }
-  $('#sv').onclick=()=>{
+  $('#sv').onclick=async()=>{
     const exp=$('#ex').value; if(!exp){ toast('만료일을 넣어 주세요'); return; }
-    const rec={...cur, type:$('#ty').value, exp, memo:$('#me').value.trim(), custom:$('#cu').value.trim()};
+    const rec={...cur, type:$('#ty').value, exp, memo:$('#me').value.trim(), custom:($('#cu')?.value||'').trim()};
     if(ed){ Object.assign(ed,rec); } else { rec.id=uid(); S.docs.push(rec); }
-    save(); go('detail',{id:ed?ed.id:rec.id, justSaved:true, changed:!!ed});
+    save();
+    if(!ed && pending && $('#keep')?.checked){ try{ await saveCopy(pending, rec.m, rec.id, docName(rec)); }catch(e){ toast('사본 보관에 실패했습니다'); } }
+    go('detail',{id:ed?ed.id:rec.id, justSaved:true, changed:!!ed});
   };
 }
 
-/* ---- 서류 읽기: PDF 글자 꺼내기 / 사진 OCR (모두 휴대폰 안에서) ---- */
+/* ================= 서류 읽기: PDF 글자 / 사진 OCR (모두 휴대폰 안에서) ================= */
 const LIB = {
   pdf: 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js',
   pdfWorker: 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js',
@@ -357,17 +473,9 @@ const LIB = {
 };
 const _loaded={};
 function loadScript(src){ return _loaded[src] ||= new Promise((ok,no)=>{ const s=document.createElement('script'); s.src=src; s.onload=ok; s.onerror=no; document.head.appendChild(s); }); }
-// 휴대폰 사진(수천 픽셀)을 긴 변 2000px 흑백으로 줄여 읽기를 빠르고 정확하게
-async function prepImage(file){
-  const bmp = await createImageBitmap(file);
-  const k = Math.min(1, 2000/Math.max(bmp.width,bmp.height));
-  const cv=document.createElement('canvas'); cv.width=Math.round(bmp.width*k); cv.height=Math.round(bmp.height*k);
-  const g=cv.getContext('2d'); g.filter='grayscale(1) contrast(1.4)'; g.drawImage(bmp,0,0,cv.width,cv.height);
-  return cv;
-}
 async function ocr(src, say){
   await loadScript(LIB.ocr);
-  if(src instanceof Blob){ try{ src = await prepImage(src); }catch(e){ /* 줄이기 실패하면 원본 그대로 */ } }
+  try{ src = await toCanvas(src, 2000, true); }catch(e){ /* 줄이기 실패하면 원본 그대로 */ }
   const { data } = await Tesseract.recognize(src, 'eng', { logger: m=>{ if(say && m.status==='recognizing text') say(`글자 읽는 중… ${Math.round(m.progress*100)}%`); } });
   return data.text;
 }
@@ -380,88 +488,202 @@ async function readPdf(file, say){
     const tc = await (await doc.getPage(p)).getTextContent();
     text += tc.items.map(it=>it.str + (it.hasEOL?'\n':' ')).join('') + '\n';
   }
-  if(GA.findExpiry(text).date) return text;
-  // 글자가 없는 스캔 PDF → 첫 장을 그림으로 그려서 OCR
-  say && say('스캔한 PDF라 그림으로 읽는 중…');
-  const page = await doc.getPage(1), vp = page.getViewport({ scale: 2 });
+  const page1 = await doc.getPage(1), vp = page1.getViewport({ scale: 2 });
   const cv = document.createElement('canvas'); cv.width=vp.width; cv.height=vp.height;
-  await page.render({ canvasContext: cv.getContext('2d'), viewport: vp }).promise;
-  return ocr(cv, say);
+  await page1.render({ canvasContext: cv.getContext('2d'), viewport: vp }).promise;
+  if(GA.findExpiry(text).date) return {text, page:cv};
+  say && say('스캔한 PDF라 그림으로 읽는 중…');   // 글자 없는 스캔 PDF
+  return {text: await ocr(cv, say), page:cv};
 }
 
-/* ---- 서류 상세 ---- */
+/* ================= 서류 상세 ================= */
 function vDetail(){
   const d=S.docs.find(x=>x.id===R.id); if(!d) return go('docs');
   const ti=typeInfo(d.type), n=dleft(d.exp);
-  head(docName(d), ()=>go('docs'));
+  head(docName(d), ()=>go(R.tab==='home'?'home':'docs'));
   const offs=[...ti.alerts].sort((a,b)=>b-a);
-  const rows=offs.map(o=>{ const dt=addDays(parse(d.exp),-o); const past=dt<today0();
-    return `<div class="a ${past?'past':''}"><span>D-${o}</span><span>${ymd(dt)}${past?' (지남)':''}</span></div>`; }).join('')
+  const rows=offs.map(o=>{ const dt=GL.addDays(d.exp,-o); const past=dt<T();
+    return `<div class="a ${past?'past':''}"><span>D-${o}</span><span>${dt}${past?' (지남)':''}</span></div>`; }).join('')
     + `<div class="a"><span>만료일</span><span>${d.exp}</span></div>`;
-  const w=warnings(d);
+  const tasks = GL.buildTasks({...S, done:{}}, T(), docName).filter(t=>t.docId===d.id);
+  const prepKey = d.id+':'+d.exp, prep = GL.PREP[d.type]||[], pdone = S.prep[prepKey]||{};
   let h='';
-  if(R.justSaved) h+=`<div class="banner">${R.changed?'수정했습니다. 달력 일정도 다시 등록해 주세요 (이미 등록한 일정은 앱에서 바꿀 수 없습니다).':'저장했습니다. 아래 버튼으로 휴대폰 달력에 알림을 등록하세요.'}</div>`;
+  if(R.justSaved) h+=`<div class="banner">${R.changed?'수정했습니다. 달력 일정도 다시 등록해 주세요 (이미 등록한 일정은 앱에서 바꿀 수 없습니다).':'저장했습니다. 홈에 할 일이 생겼고, 아래 버튼으로 휴대폰 달력에도 넣을 수 있습니다.'}</div>`;
   h+=`<div class="card"><div style="display:flex;align-items:center" class="lv-${level(n)}">
       <div><div class="small">${esc(memName(d.m))}</div><div style="font-size:15px;font-weight:700;margin-top:2px">${d.exp} 만료</div></div>
       <span class="dday" style="margin-left:auto">${ddayText(n)}</span></div>
       ${d.memo?`<div class="small" style="margin-top:8px">메모: ${esc(d.memo)}</div>`:''}</div>`;
-  h+=w.map(x=>`<div class="warn">⚠ ${esc(x)}</div>`).join('');
+  h+=GL.docWarnings(S,d).map(x=>`<div class="warn">⚠ ${esc(x)}</div>`).join('');
+  if(tasks.length) h+=`<div class="sec">할 일</div>`+tasks.map(t=>`<div class="card task ${t.status}"><div class="tt">${esc(t.title)}</div>
+      <div class="when">${t.from===t.to?t.to:`${t.from} ~ ${t.to}`}</div>${t.act?`<div class="act">${esc(t.act)}</div>`:''}
+      ${t.extra.map(x=>`<div class="ex">👪 ${esc(x)}</div>`).join('')}</div>`).join('');
+  if(prep.length) h+=`<div class="sec">연장 준비물 <span>${Object.values(pdone).filter(Boolean).length}/${prep.length}</span></div><div class="card">`+
+    prep.map((p,i)=>`<label class="item ${pdone[i]?'done':''}"><input type="checkbox" data-p="${i}" ${pdone[i]?'checked':''}><div class="x">${esc(p)}</div></label>`).join('')+
+    `<div class="small" style="margin-top:6px">${SRC_NOTE}</div></div>`;
+  h+=`<div class="sec">사본</div><div class="card"><div class="grid" id="cp"></div>
+      <div class="row2"><button class="btn ghost" id="cCam">📷 사본 찍기</button><button class="btn ghost" id="cPic">🖼 고르기</button></div></div>`;
   h+=`<div class="sec">알림 일정</div><div class="card alerts">${rows}</div>
       <button class="btn" id="cal">📅 휴대폰 달력에 등록</button>
       <div class="small" style="margin-top:6px">지나지 않은 날짜만 오전 9시 알림으로 들어갑니다.</div>`;
-  if(ti.tip) h+=`<div class="sec">갱신 준비 안내</div><div class="card tip">${esc(ti.tip)}<div class="src">${SRC_NOTE}</div></div>`;
+  if(ti.tip) h+=`<div class="sec">갱신 안내</div><div class="card tip">${esc(ti.tip)}<div class="src">${SRC_NOTE}</div></div>`;
   h+=`<div class="row2"><button class="btn ghost" id="ed">수정</button><button class="btn danger" id="del">삭제</button></div>`;
   $('#mn').innerHTML=h;
+  $$('[data-p]').forEach(x=>x.onchange=()=>{ (S.prep[prepKey] ||= {})[x.dataset.p]=x.checked; save(); vDetail(); });
+  Wallet.all().then(all=>{
+    const mine=all.filter(c=>c.docId===d.id), box=$('#cp'); if(!box) return;
+    box.innerHTML = mine.length ? mine.map(c=>`<div class="thumb" data-c="${c.id}"><img src="${blobURL(c.blob)}" alt=""><div>${new Date(c.created).toLocaleDateString('ko-KR')}</div></div>`).join('')
+      : `<div class="small" style="grid-column:1/-1">아직 사본이 없습니다. 호텔·은행·공안에서 바로 보여 줄 수 있게 찍어 두세요.</div>`;
+    $$('[data-c]').forEach(el=>el.onclick=()=>viewCopy(mine.find(c=>c.id===el.dataset.c)));
+  }).catch(()=>{});
+  const addCopy=async cap=>{ const f=await pickFile('image/*',cap); if(!f) return; await saveCopy(f, d.m, d.id, docName(d)); toast('사본을 보관했습니다'); vDetail(); };
+  $('#cCam').onclick=()=>addCopy(true); $('#cPic').onclick=()=>addCopy(false);
   $('#cal').onclick=()=>downloadICS(d);
   $('#ed').onclick=()=>go('edit',{id:d.id});
-  $('#del').onclick=()=>{ if(confirm('이 서류를 삭제할까요?')){ S.docs=S.docs.filter(x=>x.id!==d.id); save(); go('docs'); toast('삭제했습니다'); } };
+  $('#del').onclick=async()=>{ if(!confirm('이 서류와 사본을 삭제할까요?')) return;
+    S.docs=S.docs.filter(x=>x.id!==d.id); save();
+    try{ for(const c of (await Wallet.all()).filter(c=>c.docId===d.id)) await Wallet.del(c.id); }catch(e){}
+    go('docs'); toast('삭제했습니다'); };
 }
 
-/* ---- 달력 파일(.ics) ---- */
-function icsEsc(s){ return String(s).replace(/\\/g,'\\\\').replace(/;/g,'\\;').replace(/,/g,'\\,').replace(/\n/g,'\\n'); }
-function compact(d){ return ymd(d).replace(/-/g,''); }
-function downloadICS(d){
-  const ti=typeInfo(d.type), who=memName(d.m), nm=docName(d);
-  const now=new Date().toISOString().replace(/[-:]/g,'').replace(/\.\d+/,'');
-  const pts=[...ti.alerts.map(o=>({o,dt:addDays(parse(d.exp),-o)})), {o:0,dt:parse(d.exp)}].filter(p=>p.dt>=today0());
-  if(!pts.length){ toast('이미 지난 날짜뿐이라 등록할 알림이 없습니다'); return; }
-  let s='BEGIN:VCALENDAR\r\nVERSION:2.0\r\nPRODID:-//GaengsinAlimi//KO\r\nCALSCALE:GREGORIAN\r\nMETHOD:PUBLISH\r\n';
-  pts.forEach(p=>{
-    const title = p.o ? `[갱신알리미] ${who} ${nm} D-${p.o}` : `[갱신알리미] ${who} ${nm} 오늘 만료`;
-    const desc = `${nm} 만료일: ${d.exp}\n${ti.tip||''}`;
-    s+=`BEGIN:VEVENT\r\nUID:${d.id}-${p.o}@gaengsin-alimi\r\nDTSTAMP:${now}\r\nDTSTART:${compact(p.dt)}T090000\r\nDTEND:${compact(p.dt)}T091500\r\nSUMMARY:${icsEsc(title)}\r\nDESCRIPTION:${icsEsc(desc)}\r\nBEGIN:VALARM\r\nTRIGGER:PT0M\r\nACTION:DISPLAY\r\nDESCRIPTION:${icsEsc(title)}\r\nEND:VALARM\r\nEND:VEVENT\r\n`;
-  });
-  s+='END:VCALENDAR\r\n';
-  const url=URL.createObjectURL(new Blob([s],{type:'text/calendar;charset=utf-8'}));
-  const a=document.createElement('a'); a.href=url;
-  // 아이폰은 download 속성 없이 열어야 사파리가 '캘린더에 추가' 화면을 띄운다
-  if(IS_IOS){ a.target='_blank'; } else { a.download=`갱신알리미_${who}_${nm}.ics`.replace(/[\\/:*?"<>|()]/g,''); }
-  document.body.appendChild(a); a.click(); a.remove();
-  setTimeout(()=>URL.revokeObjectURL(url),60000);
-  toast(`알림 ${pts.length}개를 달력 파일로 만들었습니다`);
+/* ================= 사본 지갑 ================= */
+function viewCopy(c){
+  if(!c) return;
+  const o=document.createElement('div'); o.className='overlay';
+  o.innerHTML=`<div class="bar"><span>${esc(memName(c.m))} · ${esc(c.label)}</span><span><button id="ovDel">삭제</button><button id="ovX">닫기 ✕</button></span></div><img src="${URL.createObjectURL(c.blob)}" alt="">`;
+  document.body.appendChild(o);
+  const close=()=>{ URL.revokeObjectURL(o.querySelector('img').src); o.remove(); };
+  o.querySelector('#ovX').onclick=close;
+  o.querySelector('#ovDel').onclick=async()=>{ if(!confirm('이 사본을 삭제할까요?')) return; await Wallet.del(c.id); close(); render(); toast('삭제했습니다'); };
+}
+function vWallet(){
+  head('사본 지갑', null, `<button class="iconbtn" id="wAdd" aria-label="사본 추가">+</button>`);
+  $('#mn').innerHTML=`<div class="small" style="margin-bottom:10px">여권·노동허가서·체류증 사진을 이 휴대폰 안에만 보관합니다. 호텔 체크인, 은행, 공안 확인 때 바로 보여 주세요.</div><div id="wl"><div class="small">불러오는 중…</div></div>`;
+  $('#wAdd').onclick=()=>go('wadd');
+  Wallet.all().then(all=>{
+    const box=$('#wl'); if(!box) return;
+    if(!all.length){ box.innerHTML=`<div class="empty">보관한 사본이 없습니다<br><button class="btn" id="wAdd2" style="max-width:220px;margin:16px auto 0">📷 사본 찍기</button></div>`; $('#wAdd2').onclick=()=>go('wadd'); return; }
+    box.innerHTML = S.members.map(m=>{ const cs=all.filter(c=>c.m===m.id); if(!cs.length) return '';
+      return `<div class="sec">${esc(m.name)}</div><div class="grid">`+cs.map(c=>`<div class="thumb" data-c="${c.id}"><img src="${blobURL(c.blob)}" alt=""><div>${esc(c.label)}</div></div>`).join('')+`</div>`; }).join('');
+    $$('[data-c]').forEach(el=>el.onclick=()=>viewCopy(all.find(c=>c.id===el.dataset.c)));
+  }).catch(()=>{ $('#wl').innerHTML='<div class="warn">이 브라우저에서는 사본을 보관할 수 없습니다.</div>'; });
+}
+function vWadd(){
+  head('사본 추가', ()=>go('wallet'));
+  const opts = S.docs.map(d=>`<option value="${d.id}">${esc(memName(d.m))} · ${esc(docName(d))}</option>`).join('');
+  $('#mn').innerHTML=`<label class="f">어떤 서류인가요?</label><select id="wd">${opts}<option value="">기타 (직접 이름 입력)</option></select>
+    <div id="wcw" style="display:${S.docs.length?'none':'block'}"><label class="f">누구의 것인가요?</label><select id="wm">${S.members.map(m=>`<option value="${m.id}">${esc(m.name)}</option>`).join('')}</select>
+    <label class="f">이름</label><input id="wl2" placeholder="예: 비자 사본, 학생증"></div>
+    <div class="row2"><button class="btn" id="wc">📷 찍기</button><button class="btn ghost" id="wp">🖼 고르기</button></div>`;
+  $('#wd').onchange=e=>$('#wcw').style.display=e.target.value?'none':'block';
+  const add=async cap=>{ const f=await pickFile('image/*',cap); if(!f) return;
+    const did=$('#wd').value, d=S.docs.find(x=>x.id===did);
+    await saveCopy(f, d?d.m:$('#wm').value, d?d.id:null, d?docName(d):($('#wl2').value.trim()||'기타'));
+    toast('사본을 보관했습니다'); go('wallet'); };
+  $('#wc').onclick=()=>add(true); $('#wp').onclick=()=>add(false);
 }
 
-/* ---- 체크리스트 ---- */
+/* ================= 체류일 ================= */
+function vStay(){
+  head('체류일 계산');
+  const rp=GL.stayReport(S.stays, T());
+  let h='';
+  if(rp){
+    h+=`<div class="card">
+      <div class="stat"><span>${rp.year}년 베트남 체류</span><b>${rp.yearDays}일</b></div>
+      <div class="stat"><span>세금 거주자 기준 183일까지</span><b>${rp.resident183?'넘음':rp.daysTo183+'일 남음'}</b></div>
+      <div class="stat"><span>첫 입국부터 12개월 (${rp.first} ~ ${rp.firstEnd})</span><b>${rp.firstDays}일</b></div></div>
+      <div class="small" style="margin:-4px 0 10px">베트남은 한 해 183일 이상, 또는 첫 입국일부터 12개월 안에 183일 이상 머물면 세금 거주자가 됩니다. 입국일·출국일은 모두 1일로 셉니다.</div>`;
+    h+=`<div class="sec">한국 건강보험 (해외 체류 면제)</div><div class="card">`;
+    if(rp.krNow) h+=`<div class="warn" style="margin:0 0 8px">지금 한국에 와 있는 것으로 되어 있습니다. 2025년 7월부터는 입국하면 급여정지가 바로 풀리고, 다시 출국한 날부터 기간을 새로 셉니다.</div>`;
+    h+=`<div class="stat"><span>마지막 한국 출국</span><b>${rp.krLeave}</b></div>
+      <div class="stat"><span>3개월 기준 충족일</span><b>${rp.hi3}${rp.hi3<=T()&&!rp.krNow?' ✔':''}</b></div>
+      <div class="stat"><span>업무 목적 인정 시 1개월</span><b>${rp.hi1}${rp.hi1<=T()&&!rp.krNow?' ✔':''}</b></div>
+      <div class="small" style="margin-top:6px">직장가입자는 국외 3개월 이상(공단이 업무 목적으로 인정하면 1개월 이상) 체류해야 보험료 면제 대상입니다. 한국에 들어온 달에 진료를 받으면 그 달 보험료가 부과될 수 있습니다. ${SRC_NOTE}</div></div>`;
+  } else h+=`<div class="card small">베트남에 들어온 날과 나간 날을 적으면 세금 183일, 한국 건강보험 해외 체류 기준을 자동으로 계산합니다. 회사 출장으로 한국에 다녀온 것도 적어 주세요.</div>`;
+  h+=`<div class="sec">출입국 기록 <span>최근 순</span></div>`;
+  const list=[...S.stays].map((s,i)=>({...s,i})).sort((a,b)=>a.in<b.in?1:-1);
+  h+=list.map(s=>`<div class="card"><div class="stayrow">
+      <div><label class="f" style="margin-top:0">베트남 입국</label><input type="date" data-s="${s.i}" data-k="in" value="${s.in||''}"></div>
+      <div><label class="f" style="margin-top:0">베트남 출국</label><input type="date" data-s="${s.i}" data-k="out" value="${s.out||''}"></div></div>
+      <div class="stayrow" style="margin-top:8px;align-items:center">
+      <select data-s="${s.i}" data-k="to" ${s.out?'':'disabled'}><option value="KR" ${s.to!=='ETC'?'selected':''}>한국으로 출국</option><option value="ETC" ${s.to==='ETC'?'selected':''}>다른 나라로 출국</option></select>
+      <div style="text-align:right"><span class="small">${s.out?'':'지금 베트남에 있음'}</span> <button class="link" data-sdel="${s.i}">삭제</button></div></div></div>`).join('');
+  h+=`<button class="btn ghost" id="sAdd">+ 베트남 입국 기록 추가</button>`;
+  $('#mn').innerHTML=h;
+  $$('[data-s]').forEach(x=>x.onchange=()=>{ const s=S.stays[+x.dataset.s]; s[x.dataset.k]=x.value; if(x.dataset.k==='out'&&x.value&&!s.to) s.to='KR';
+    if(s.in&&s.out&&s.out<s.in){ toast('출국일이 입국일보다 빠릅니다'); } save(); vStay(); });
+  $$('[data-sdel]').forEach(b=>b.onclick=()=>{ if(!confirm('이 기록을 삭제할까요?')) return; S.stays.splice(+b.dataset.sdel,1); save(); vStay(); });
+  $('#sAdd').onclick=()=>{ const open=S.stays.find(s=>!s.out);
+    if(open){ toast('먼저 지금 기록의 베트남 출국일을 넣어 주세요'); return; }
+    S.stays.push({in:T(), out:'', to:'KR'}); save(); vStay(); toast('입국일을 실제 날짜로 고쳐 주세요'); };
+}
+
+/* ================= 더보기 ================= */
 function itemsFor(key){ return CHECKLISTS[key].items.filter(i=>!i.c || i.c===S.country); }
-function vCheck(){
-  head('체크리스트');
-  $('#mn').innerHTML = Object.entries(CHECKLISTS).map(([k,c])=>{
-    const its=itemsFor(k), done=its.filter(i=>S.checks[k+':'+i.id]).length;
-    const pct=Math.round(done/its.length*100);
-    return `<div class="card" data-l="${k}" style="cursor:pointer"><div style="font-weight:700;font-size:16px">${c.icon} ${c.name}</div>
-      <div class="small" style="margin-top:4px">${done?`${its.length}개 중 ${done}개 완료`:'시작 전'}${S.base[k]?` · ${c.baseLabel} ${S.base[k]}`:''}</div>
-      <div class="prog"><i style="width:${pct}%"></i></div></div>`;
-  }).join('') + `<div class="small">나라를 바꾸면 그 나라 항목이 함께 바뀝니다 (설정 → 사는 나라).</div>`;
-  document.querySelectorAll('[data-l]').forEach(c=>c.onclick=()=>go('list',{id:c.dataset.l}));
+function vMore(){
+  head('더보기');
+  const cs=Object.entries(COUNTRIES).map(([k,v])=>`<option value="${k}" ${S.country===k?'selected':''}>${esc(v.name)}</option>`).join('');
+  $('#mn').innerHTML=`
+    <div class="sec">체크리스트</div>
+    <div class="row2">${Object.entries(CHECKLISTS).map(([k,c])=>`<button class="btn ghost" data-l="${k}" style="margin-top:0">${c.icon} ${c.name}</button>`).join('')}</div>
+    <div class="sec">가족 구성원</div>
+    <div class="card">${S.members.map(m=>`<div class="mem"><div><div>${esc(m.name)}</div>${m.id==='me'?'<div class="small">주재원 본인</div>':`<label class="chk" style="margin-top:4px"><input type="checkbox" data-dep="${m.id}" ${m.dep?'checked':''}> 나에게 딸린 동반가족 (체류 서류가 내 서류에 연결)</label>`}</div>
+      ${m.id==='me'?'':`<button class="link" data-rm="${m.id}">삭제</button>`}</div>`).join('')}
+      <div class="row2" style="margin-top:10px"><input id="nm" placeholder="예: 배우자, 자녀1"><button class="btn" id="am" style="margin:0;width:90px;flex:none">추가</button></div></div>
+    <div class="sec">내 연락처 <span>홈 비상 연락처 위에 보임</span></div>
+    <div class="card">${S.contacts.map(c=>`<div class="mem"><div><div>${esc(c.name)}</div><div class="small">${esc(c.tel)}</div></div><button class="link" data-crm="${c.id}">삭제</button></div>`).join('')}
+      <div class="row2" style="margin-top:10px"><input id="cn" placeholder="예: 회사 인사팀"><input id="ct2" type="tel" placeholder="+84 …"></div>
+      <button class="btn ghost" id="ca">연락처 추가</button></div>
+    <div class="sec">사는 나라</div>
+    <div class="card"><select id="ct">${cs}</select>
+      <div class="small" style="margin-top:8px">지금은 베트남 안내만 들어 있습니다. 다른 나라는 서류 이름과 만료일을 직접 넣으면 알림은 똑같이 됩니다.</div></div>
+    <div class="sec">백업</div>
+    <div class="card"><div class="small">휴대폰을 바꿀 때 파일로 옮기세요. 사본 사진도 함께 들어갑니다.</div>
+      <div class="row2"><button class="btn ghost" id="ex">내보내기</button><button class="btn ghost" id="im">불러오기</button></div></div>
+    <div class="sec">개인정보</div>
+    <div class="card small">회원가입이 없고, 입력한 정보와 사본 사진은 서버로 보내지 않고 이 휴대폰 안에만 저장합니다. 사진·PDF 글자 읽기도 휴대폰 안에서 합니다.</div>`;
+  $$('[data-l]').forEach(b=>b.onclick=()=>go('list',{id:b.dataset.l, back:'more'}));
+  $$('[data-dep]').forEach(x=>x.onchange=()=>{ const m=S.members.find(y=>y.id===x.dataset.dep); m.dep=x.checked?'me':undefined; save(); });
+  $('#am').onclick=()=>{ const v=$('#nm').value.trim(); if(!v) return; S.members.push({id:uid(),name:v,dep:'me'}); save(); vMore(); toast('동반가족으로 추가했습니다'); };
+  $$('[data-rm]').forEach(b=>b.onclick=async()=>{
+    const id=b.dataset.rm, cnt=S.docs.filter(d=>d.m===id).length;
+    if(!confirm(cnt?`이 구성원의 서류 ${cnt}개와 사본도 함께 지워집니다. 삭제할까요?`:'삭제할까요?')) return;
+    S.members=S.members.filter(m=>m.id!==id); S.docs=S.docs.filter(d=>d.m!==id); if(R.filter===id) R.filter='all'; save();
+    try{ for(const c of (await Wallet.all()).filter(c=>c.m===id)) await Wallet.del(c.id); }catch(e){}
+    vMore(); });
+  $('#ca').onclick=()=>{ const n=$('#cn').value.trim(), t=$('#ct2').value.trim(); if(!n||!t){ toast('이름과 번호를 넣어 주세요'); return; } S.contacts.push({id:uid(),name:n,tel:t}); save(); vMore(); };
+  $$('[data-crm]').forEach(b=>b.onclick=()=>{ S.contacts=S.contacts.filter(c=>c.id!==b.dataset.crm); save(); vMore(); });
+  $('#ct').onchange=e=>{ S.country=e.target.value; save(); toast(C().name+'(으)로 바꿨습니다'); };
+  $('#ex').onclick=exportBackup;
+  $('#im').onclick=async()=>{ const f=await pickFile('application/json,.json',false); if(f) importBackup(f); };
 }
+function blobToData(b){ return new Promise(ok=>{ const r=new FileReader(); r.onload=()=>ok(r.result); r.readAsDataURL(b); }); }
+async function exportBackup(){
+  let copies=[]; try{ copies=await Promise.all((await Wallet.all()).map(async c=>({...c, blob:await blobToData(c.blob)}))); }catch(e){}
+  const url=URL.createObjectURL(new Blob([JSON.stringify({app:'gaengsin-alimi', state:S, copies})],{type:'application/json'}));
+  const a=document.createElement('a'); a.href=url; a.download=`갱신알리미_백업_${T()}.json`; document.body.appendChild(a); a.click(); a.remove();
+  setTimeout(()=>URL.revokeObjectURL(url),60000);
+}
+function importBackup(f){
+  const r=new FileReader();
+  r.onload=async()=>{ try{
+    const o=JSON.parse(r.result); const st=o.state||o; if(!st.docs||!st.members) throw 0;
+    S=Object.assign(fresh(), st); save();
+    for(const c of (o.copies||[])){ const b=await (await fetch(c.blob)).blob(); await Wallet.put({...c, blob:b}); }
+    toast('불러왔습니다'); R.tab='home'; go('home');
+  }catch(_){ toast('백업 파일이 아닙니다'); } };
+  r.readAsText(f);
+}
+
+/* ---- 체크리스트 상세 ---- */
 function vList(){
-  const k=R.id, c=CHECKLISTS[k]; head(c.name+' 체크리스트', ()=>go('check'));
+  const k=R.id, c=CHECKLISTS[k], back=R.back||'more'; head(c.name+' 체크리스트', ()=>{ R.tab=back==='home'?'home':'more'; go(back); });
   const base=S.base[k];
   let h=`<label class="f">${c.baseLabel}</label><input type="date" id="bd" value="${base||''}">
          <div class="small" style="margin:6px 0 12px">이 날짜로 단계별 시기를 계산합니다.</div>`;
   h+=c.stages.map(st=>{
     const its=itemsFor(k).filter(i=>i.st===st.id); if(!its.length) return '';
-    const when = (base && st.off!==null) ? ymd(addDays(parse(base),st.off))+(st.off<0?'까지':st.off>0?' 무렵':'') : '';
+    const when = (base && st.off!==null) ? GL.addDays(base,st.off)+(st.off<0?'까지':st.off>0?' 무렵':'') : '';
     const open = R.open[k+st.id]!==false;
     return `<div class="card stage"><h3 data-s="${st.id}">${open?'▼':'▶'} ${st.name} <span>${when}</span></h3>
       ${open?its.map(i=>{ const on=!!S.checks[k+':'+i.id];
@@ -471,40 +693,31 @@ function vList(){
   h+=`<div class="small" style="margin-top:8px">${SRC_NOTE}</div>`;
   $('#mn').innerHTML=h;
   $('#bd').onchange=e=>{ S.base[k]=e.target.value; save(); vList(); };
-  document.querySelectorAll('[data-s]').forEach(x=>x.onclick=()=>{ const key=k+x.dataset.s; R.open[key]=R.open[key]===false; vList(); });
-  document.querySelectorAll('[data-i]').forEach(x=>x.onchange=()=>{ S.checks[k+':'+x.dataset.i]=x.checked; save(); x.closest('.item').classList.toggle('done',x.checked); });
+  $$('[data-s]').forEach(x=>x.onclick=()=>{ const key=k+x.dataset.s; R.open[key]=R.open[key]===false; vList(); });
+  $$('[data-i]').forEach(x=>x.onchange=()=>{ S.checks[k+':'+x.dataset.i]=x.checked; save(); x.closest('.item').classList.toggle('done',x.checked); });
 }
 
-/* ---- 설정 ---- */
-function vSettings(){
-  head('설정');
-  const cs=Object.entries(COUNTRIES).map(([k,v])=>`<option value="${k}" ${S.country===k?'selected':''}>${esc(v.name)}</option>`).join('');
-  $('#mn').innerHTML=`
-    <div class="sec">사는 나라</div>
-    <div class="card"><select id="ct">${cs}</select>
-      <div class="small" style="margin-top:8px">지금은 베트남 안내만 들어 있습니다. 다른 나라는 서류 이름과 만료일을 직접 넣으면 알림은 똑같이 됩니다.</div></div>
-    <div class="sec">가족 구성원</div>
-    <div class="card">${S.members.map(m=>`<div class="mem"><span>${esc(m.name)}</span>${m.id==='me'?'<span class="small">기본</span>':`<button class="link" data-rm="${m.id}">삭제</button>`}</div>`).join('')}
-      <div class="row2" style="margin-top:10px"><input id="nm" placeholder="예: 자녀2"><button class="btn" id="am" style="margin:0;width:90px;flex:none">추가</button></div></div>
-    <div class="sec">백업</div>
-    <div class="card"><div class="small">휴대폰을 바꿀 때 파일로 옮기세요.</div>
-      <div class="row2"><button class="btn ghost" id="ex">내보내기</button><button class="btn ghost" id="im">불러오기</button></div>
-      <input type="file" id="fi" accept="application/json" style="display:none"></div>
-    <div class="sec">개인정보</div>
-    <div class="card small">회원가입이 없고, 입력한 정보는 서버로 보내지 않고 이 휴대폰 안에만 저장합니다.</div>
-    ${S.sample?'<button class="btn danger" id="clr">예시 서류 지우고 시작하기</button>':''}`;
-  $('#ct').onchange=e=>{ S.country=e.target.value; save(); toast(C().name+'(으)로 바꿨습니다'); };
-  $('#am').onclick=()=>{ const v=$('#nm').value.trim(); if(!v) return; S.members.push({id:uid(),name:v}); save(); vSettings(); };
-  document.querySelectorAll('[data-rm]').forEach(b=>b.onclick=()=>{
-    const id=b.dataset.rm, cnt=S.docs.filter(d=>d.m===id).length;
-    if(!confirm(cnt?`이 구성원의 서류 ${cnt}개도 함께 지워집니다. 삭제할까요?`:'삭제할까요?')) return;
-    S.members=S.members.filter(m=>m.id!==id); S.docs=S.docs.filter(d=>d.m!==id); if(R.filter===id) R.filter='all'; save(); vSettings(); });
-  $('#ex').onclick=()=>{ const url=URL.createObjectURL(new Blob([JSON.stringify(S,null,1)],{type:'application/json'}));
-    const a=document.createElement('a'); a.href=url; a.download=`갱신알리미_백업_${ymd(today0())}.json`; a.click(); setTimeout(()=>URL.revokeObjectURL(url),2000); };
-  $('#im').onclick=()=>$('#fi').click();
-  $('#fi').onchange=e=>{ const f=e.target.files[0]; if(!f) return; const r=new FileReader();
-    r.onload=()=>{ try{ const o=JSON.parse(r.result); if(!o.docs||!o.members) throw 0; S=o; save(); toast('불러왔습니다'); vSettings(); }catch(_){ toast('백업 파일이 아닙니다'); } }; r.readAsText(f); };
-  const clr=$('#clr'); if(clr) clr.onclick=()=>{ S.docs=[]; S.checks={}; S.sample=false; save(); toast('예시를 지웠습니다'); R.tab='docs'; go('docs'); };
+/* ================= 달력 파일(.ics) ================= */
+function icsEsc(s){ return String(s).replace(/\\/g,'\\\\').replace(/;/g,'\\;').replace(/,/g,'\\,').replace(/\n/g,'\\n'); }
+function downloadICS(d){
+  const ti=typeInfo(d.type), who=memName(d.m), nm=docName(d);
+  const now=new Date().toISOString().replace(/[-:]/g,'').replace(/\.\d+/,'');
+  const pts=[...ti.alerts.map(o=>({o,dt:GL.addDays(d.exp,-o)})), {o:0,dt:d.exp}].filter(p=>p.dt>=T());
+  if(!pts.length){ toast('이미 지난 날짜뿐이라 등록할 알림이 없습니다'); return; }
+  let s='BEGIN:VCALENDAR\r\nVERSION:2.0\r\nPRODID:-//GaengsinAlimi//KO\r\nCALSCALE:GREGORIAN\r\nMETHOD:PUBLISH\r\n';
+  pts.forEach(p=>{
+    const title = p.o ? `[갱신알리미] ${who} ${nm} D-${p.o}` : `[갱신알리미] ${who} ${nm} 오늘 만료`;
+    const desc = `${nm} 만료일: ${d.exp}\n${ti.tip||''}`, c=p.dt.replace(/-/g,'');
+    s+=`BEGIN:VEVENT\r\nUID:${d.id}-${p.o}@gaengsin-alimi\r\nDTSTAMP:${now}\r\nDTSTART:${c}T090000\r\nDTEND:${c}T091500\r\nSUMMARY:${icsEsc(title)}\r\nDESCRIPTION:${icsEsc(desc)}\r\nBEGIN:VALARM\r\nTRIGGER:PT0M\r\nACTION:DISPLAY\r\nDESCRIPTION:${icsEsc(title)}\r\nEND:VALARM\r\nEND:VEVENT\r\n`;
+  });
+  s+='END:VCALENDAR\r\n';
+  const url=URL.createObjectURL(new Blob([s],{type:'text/calendar;charset=utf-8'}));
+  const a=document.createElement('a'); a.href=url;
+  // 아이폰은 download 속성 없이 열어야 사파리가 '캘린더에 추가' 화면을 띄운다
+  if(IS_IOS){ a.target='_blank'; } else { a.download=`갱신알리미_${who}_${nm}.ics`.replace(/[\\/:*?"<>|()]/g,''); }
+  document.body.appendChild(a); a.click(); a.remove();
+  setTimeout(()=>URL.revokeObjectURL(url),60000);
+  toast(`알림 ${pts.length}개를 달력 파일로 만들었습니다`);
 }
 
 render();
